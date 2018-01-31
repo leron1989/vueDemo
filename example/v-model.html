@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-model</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h2>v-model</h2>
+    <hr>
+    <p style="color:red">
+        v-model：绑定数据源。就是把数据绑定在特定的表单元素上，可以很容易的实现双向数据绑定。<br>
+        v-model-lazy：延迟绑定，当鼠标焦点移开时生效<br>
+        v-model-number：数字绑定，只有输入数字时生效，前提时原文本框信息为数字，空也不行<br>
+        v-model-trim：去除首尾空格<br>
+    </p>
+    <hr>
+    <div id="app">
+        <div>
+            <h3>文本框绑定：</h3>
+            <p>
+                原始文本信息：<span>{{message}}</span>
+            </p>
+            <span>v-model：</span><input type="text" v-model="message"><br>
+            <span>v-model.lazy：</span><input type="text" v-model.lazy="message"><br>
+            <span>v-model.number：</span><input type="text" v-model.number="message"><br>
+            <span>v-model.trim：</span><input type="text" v-model.trim="message"><br>
+            <hr>
+            <h3>textarea绑定</h3>
+            <span>textarea：</span><textarea cols="30" rows="3" v-model="message"></textarea><br>
+            <hr>
+            <h3>多选框绑定</h3>
+            <input type="checkbox" v-model="isTrue"><label>{{isTrue}}</label>
+            <hr>
+            <h3>多选框绑定数组</h3>
+            <input type="checkbox" value="zhangshan" v-model="studentName"><label>张三</label>
+            <input type="checkbox" value="lisi" v-model="studentName"><label>李四</label>
+            <input type="checkbox" value="wangwu" v-model="studentName"><label>王五</label>
+            <input type="checkbox" value="zhaoliu" v-model="studentName"><label>赵六</label><br>
+            <span>{{studentName}}</span>
+            <h3>单选框绑定</h3>
+            <input type="radio" value="男" v-model="sex"><label>男</label>
+            <input type="radio" value="女" v-model="sex"><label>女</label><br>
+            <span>性别是：{{sex}}</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:"123",
+                isTrue:true,
+                studentName:[],
+                sex:"男"
+            }
+            
+        });
+
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-for</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h2>v-for</h2>
+    <hr>
+    <div id="app">
+        <ul>
+            <li v-for="item in sortItems">
+                {{item}}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="student in students">
+                {{student.name}}-{{student.age}}
+            </li>
+        </ul>
+        <ul>
+            <!-- 括号中的第二个参数是序号-->
+            <li v-for="(student, index) in sortStudents">
+                {{index+1}}:{{student.name}}-{{student.age}}
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                items:[14,35,565,83,3,92,44], //v-for实现循环
+                students:[
+                    {name:"zhangshan",age:33},
+                    {name:"lisi",age:28},
+                    {name:"wangwu",age:22},
+                    {name:"zhaoliu",age:18}
+                ]
+            },
+            //computed属性用于编程使用，为了保护data中的属性，computed中的属性名不能与data中重复
+            computed:{
+                sortItems:function(){
+                    //javascript排序不会根据数字大小排序，需要自己写排序方法传入
+                    return this.items.sort(sortNumber)
+                },
+                sortStudents:function(){
+                    return sortByKey(this.students, "age");
+                }
+            }
+        });
+
+        //数字排序方法
+        function sortNumber(a,b){
+            return a-b;
+        }
+
+        //对象数组排序方法
+        function sortByKey(array, key){
+            return array.sort(function(a,b){
+                var x=a[key];
+                var y=b[key];
+                return ((x<y)?-1:((x>y)?1:0));
+            })
+        }
+
+    </script>
+</body>
+</html>

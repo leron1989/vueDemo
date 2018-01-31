@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-text&v-html</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h2>v-text&v-html</h2>
+    <hr>
+    <div id="app">
+        <!-- 
+            v-text：实际开发中部直接用{{message}}方式加载text数据，
+                原因是js未加载完成或者网速慢时时网页上会显示{{message}}，不友好。
+                使用v-text不会有上述问题
+            v-html：用于显示html标签，实际开发中最好少用，这种写法会引起黑客XSS攻击
+        -->
+        <span>{{message}}</span><br>
+        <span v-text="message"></span><br>
+        <span v-text="dodo"></span><br>
+        <span v-html="dodo"></span><br>
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:"V-TEXT",
+                dodo:"<h2>V-HTML</h2>"
+            },
+            
+        });
+
+        
+
+    </script>
+</body>
+</html>

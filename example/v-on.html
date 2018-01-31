@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-on</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h2>v-on</h2>
+    <hr>
+    <div id="app">
+        <!-- 
+            v-on：监听事件，可以用于监听DOM事件来触发一些javascript代码,@时v-on的简写
+            methods属性用于构造事件方法
+        -->
+        本场比赛得分：<span v-text="score"></span>
+        <div>
+            <button v-on:click="addScore">加分</button>
+            <button @click="minusScore">减分</button>
+        </div>
+        
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                score:0
+            },
+            methods:{
+                addScore:function(){
+                    this.score++
+                },
+                minusScore:function(){
+                    this.score--
+                }
+            }
+            
+        });
+
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-if</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h2>v-if&v-else&v-show</h2>
+    <hr>
+    <div id="app">
+        <div v-if="isLogin">你好，伙计</div>
+        <div v-if="isPass">伙计，登入一下吧</div>
+        <div v-else="isPass">伙计，赶紧注册吧</div>
+        <div v-show="isShow">伙计，我是SHOW</div>
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                isLogin:false,//v-if&v-eles判断是否要把元素加载的dom中，vue没有else if的概念，但是可以通过多个data属性组合来实现else if
+                isPass:false,
+                isShow:true//v-show调整display属性
+            }
+        })
+
+    </script>
+</body>
+</html>
