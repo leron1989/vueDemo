@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.extend</title>
+    <script src="../../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>Vue.extend 扩展构造器</h1>
+    <hr>
+    <p style="color:red">
+        1.Vue.extend:扩展构造器，常用于组建开发，定义好扩展后需要创建对象，并调用$mount方法进行绑定，绑定时可像Jquery一样通过$，元素标签等方式绑定<br>
+        2.需要注意构造器中data属性值时一个函数，函数里面放回一个对象
+    </p>
+    <hr>
+    <div id="extend"></div>
+
+    <script type="text/javascript">
+        var myExtend = Vue.extend({
+            template:"<p><a :href='myGithub' v-text='urlName'></a></p>",
+            data:function(){
+                return {
+                    urlName:"Leron Github",
+                    myGithub:"https://github.com/leron1989"
+                };
+            }
+        });
+
+        new myExtend().$mount("#extend")
+        
+    </script>
+</body>
+</html>

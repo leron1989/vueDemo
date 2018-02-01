@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.directive</title>
+    <script src="../../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>Vue.directive 自定义指令</h1>
+    <hr>
+    <p style="color:red">
+        1. Vue.directive可用于自定义指令，传入两个参数，第一个参数为指令名，第二个为方法，方法的第一个参数代表被绑定的元素，第二个参数为绑定的相关信息<br>
+        2. 自定义指令的生命周期：bind-被绑定；inserted-被绑定到父节点；update-组件更新；componentUpdated-组件更新完成；unbind-解绑
+    </p>
+    <hr>
+    <div id="app">
+        <h3>自定义指令</h3>
+        <span v-leron="color" v-text="num"></span><br>
+        <button v-on:click="addNum">ADD</button>
+        <hr>
+        <h3>自定义指令的生命周期</h3>
+        <span v-livedata="color2" v-text="num2"></span><br>
+        <button @click="minueNumber">MINUE</button><br>
+        <button onclick="unbindVue()">解绑定</button>
+    </div>
+
+    <script type="text/javascript">
+
+        function unbindVue(){
+            app.$destroy();
+        }
+
+        Vue.directive("leron", function(el, binding){
+            // console.log(el);
+            // console.log(binding);
+            el.style = "color:" + binding.value;
+        });
+
+        Vue.directive("livedata", {
+            //被绑定
+            bind:function(el, binding){
+                console.log("1 - bind");
+                el.style = "color:" + binding.value;
+            },
+            //被绑定到父节点
+            inserted:function(){
+                console.log("2 - inserted");
+            },
+            //组件更新
+            update:function(){
+                console.log("3 - update");
+            },
+            //组件更新完成
+            componentUpdated:function(){
+                console.log("4 - componentUpdated");
+            },
+            //解绑
+            unbind:function(){
+                console.log("5 - unbind");
+            }
+        });
+        
+        var app = new Vue({
+            el:"#app",
+            data:{
+                num:10,
+                color:"red",
+                num2:0,
+                color2:"green"
+            },
+            methods:{
+                addNum:function(){
+                    return this.num++;
+                },
+                minueNumber:function(){
+                    return this.num2--;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
