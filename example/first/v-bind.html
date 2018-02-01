@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-bind</title>
+    <script src="../../assets/js/vue.js"></script>
+    <style>
+        .classA{
+            color:red;
+        }
+        .classB{
+            font-size: 150%;
+        }
+    </style>
+</head>
+<body>
+    <h2>v-bind</h2>
+    <hr>
+    <p style="color:red">
+        v-bind：处理HTML中的标签属性的，例如img就是一个标签，我们绑定img上的src进行动态赋值。<br>
+                可用:简写
+    </p>
+    <hr>
+    <div id="app">
+        <h3>绑定元素属性值</h3>
+        <img v-bind:src="imgSrc" width="200px">
+        <hr>
+        <h3>缩写</h3>
+        <a :href="webUrl" target="_blank">Leron Github</a>
+        <hr>
+        <h3>绑定CSS样式</h3>
+        <div :class="className">1.直接绑定class样式</div>
+        <div :class="{classA:isOK}">2.绑定classA并进行判断，在isOK为true时显示样式，在isOk为false时不显示样式</div>
+        <div :class="[class_a,class_b]">3.绑定class中的数组</div>
+        <div :class="isOK?class_a:class_b">4.绑定class中使用三元表达式判断</div>
+        <input type="checkbox" v-model="isOK"><label>{{isOK}}</label><br>
+        <div v-bind:style="{color:redColor,fontSize:midFontSize}">5.绑定style，在VUE中无法使用-链接符，如果font-size要写成fontSize</div>
+        <div :style="styleObj">6.用对象绑定style样式</div>
+        <hr>
+        
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                imgSrc:"./img/vue01-2.jpg",
+                webUrl:"https://github.com/leron1989",
+                className:"classA",
+                isOK:true,
+                class_a:"classA",
+                class_b:"classB",
+                redColor:"blue",
+                midFontSize:"80%",
+                styleObj:{
+                    color:"yellow",
+                    fontSize:"200%"
+                }
+            },
+            
+        });
+
+        
+
+    </script>
+</body>
+</html>
