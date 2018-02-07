@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
+    <title>vue-mixins</title>
     <script src="../../assets/js/vue.js"></script>
 </head>
 <body>
-    <h1></h1>
+    <h1>vue-mixins混入选项</h1>
     <hr>
     <p style="color:red">
-        1. 
+        1. 构造器写好了，临时添加可用混入，如电商促销，满199-100这种活动，可以减少源代码的污染
+        2. 全局混入，可以用于对所有构造器混入公用方法
+        3. 执行顺序：全局混入 > 局部混入 > 原生
     </p>
     <hr>
     <div id="app">

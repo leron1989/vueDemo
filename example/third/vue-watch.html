@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-watch</title>
+    <script src="../../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>vue-watch监控数据变化</h1>
+    <hr>
+    <p style="color:red">
+        1. 在构造器内部添加watch选项可以进行数据监控，数据监控的方法有两个参数，第一个时新值，第二个是旧值<br>
+        2. 通过app.$watch("", function(newVal, oldVal){....})可以在构造器外部添加监控
+    </p>
+    <hr>
+    <div id="app">
+        <h3>watch构造器内部监控数据</h3>
+        <p>今日温度：<span v-text="temp"></span>℃</p>
+        <p>今天适合传：<span v-text="cloths"></span></p>
+        <button @click="reduceTemp">降温</button>
+        <button @click="riseTemp">增温</button>
+        <hr>
+        <h3>watch构造器外部监控数据</h3>
+        <p>汽车时速：<span v-text="speed"></span></p>
+        <p><span v-text="warning"></span></p>
+        <button @click="riseSpeed(30)">加速</button>
+        <button @click="reduceSpeed(30)">减速</button>
+        <hr>
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                temp:16,
+                cloths:"夹克",
+                speed:60,
+                warning:"兄弟，开的有点慢啊"
+            },
+            methods:{
+                riseTemp:function(){
+                    this.temp ++
+                },
+                reduceTemp:function(){
+                    this.temp --
+                },
+                riseSpeed:function(s){
+                    this.speed += s
+                },
+                reduceSpeed:function(s){
+                    this.speed -= s
+                }
+            },
+            watch:{
+                temp:function(newTemp, oldTemp){
+                    if(newTemp > 25 && newTemp < 40){
+                        this.cloths = "短袖"
+                    }else if(newTemp > 15 && newTemp <= 25){
+                        this.cloths = "夹克"
+                    }else if(newTemp > 5 && newTemp <= 15){
+                        this.cloths = "棉衣"
+                    }else if(newTemp > -10 && newTemp <= 5){
+                        this.cloths = "羽绒服"
+                    }else if(newTemp <= -10){
+                        this.cloths = "冻死你得了"
+                    }else{
+                        this.cloths = "躺地上等着变猪排吧"
+                    }
+                }
+            }
+        });
+
+        app.$watch("speed",function(newSpeed, oldSpeed){
+            if(newSpeed <= 60){
+                this.warning = "兄弟，开的有点慢啊"
+            }else if(newSpeed > 60 && newSpeed <= 120){
+                this.warning = "老铁，稳得很"
+            }else if(newSpeed >= 120 && newSpeed <= 180){
+                this.warning = "差不多了啊"
+            }else{
+                this.warning = "你这是要飞啊"
+            }
+        });
+
+    </script>
+</body>
+</html>

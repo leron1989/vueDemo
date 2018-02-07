@@ -4,28 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
+    <title>vue-propsData</title>
     <script src="../../assets/js/vue.js"></script>
 </head>
 <body>
-    <h1></h1>
+    <h1>vue-propsData扩展属性</h1>
     <hr>
     <p style="color:red">
-        1. 
+        1. 扩展属性
     </p>
     <hr>
     <div id="app">
         <h3></h3>
+        <leron></leron>
         <hr>
     </div>
 
     <script type="text/javascript">
-        var app = new Vue({
-            el:"#app",
-            data:{
-                message:"hello world"
-            }
+        
+        var ext = Vue.extend({
+            template:`
+                <div style="color: red">{{message}} - {{a}},我时一个扩容标签</div>
+            `,
+            data:function(){
+                return {
+                    message:"hello, my name is leron"
+                }
+            },
+            props:['a']
         })
+
+        new ext({propsData:{a:12}}).$mount("leron");
+
 
     </script>
 </body>

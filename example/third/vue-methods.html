@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-methods</title>
+    <script src="../../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>methods选项的四个特性</h1>
+    <hr>
+    <p style="color:red">
+        1. methods事件传参数，如：v-on:click="add(3)<br>
+        2. methods事件event参数，如：v-on:click="add(3, $event)"<br>
+        3. 组件调用作用域内部方法可以使用.native，如：@click.native="add2(2)"<br>
+        4. 外部方法调用作用域的方法可以通过vue对象调用，如：onClick="app.add2(5)"<br>
+    </p>
+    <hr>
+    <div id="app">
+        <h3>methods事件传参及event</h3>
+        <p v-text="num"></p>
+        <button v-on:click="add(3, $event)">ADD</button><br>
+        <h3>组件方法调用VUE作用域方法</h3>
+        <btn @click.native="add2(2)"></btn>
+        <hr>
+        <h3>外部方法调用VUE作用域方法</h3>
+        <button onClick="app.add2(5)">外部按钮</button>
+        <hr>
+    </div>
+
+    <script type="text/javascript">
+        var btn = {
+            template:`
+                <button>组建按钮</button>
+            `
+        }
+
+        var app = new Vue({
+            el:"#app",
+            data:{
+                num:1
+            },
+            methods:{
+                add:function(n, event){
+                    console.log(event)
+                    if(n){
+                        this.num += n
+                    }else{
+                        this.num ++
+                    }
+                    
+                },
+                add2:function(n){
+                    if(n){
+                        this.num += n
+                    }else{
+                        this.num ++
+                    }
+                }
+            },
+            components:{
+                "btn":btn
+            }
+        })
+
+    </script>
+</body>
+</html>

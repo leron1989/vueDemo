@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-computed</title>
+    <script src="../../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>vue-computed数据计算</h1>
+    <hr>
+    <p style="color:red">
+        1. computed选项用于对数据进行计算
+    </p>
+    <hr>
+    <div id="app">
+        <h3>computed选项</h3>
+        <span v-text="message"></span><br>
+        <span v-text="newMessage"></span><br>
+        <ul>
+            <li v-for="item in newNumArr">{{item}}</li>
+        </ul>
+        <hr>
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:"hello world",
+                numArr:[3,65,2,9,12,1,0,43]
+            },
+            computed:{
+                newMessage:function(){
+                    return this.message + ", hello leron"
+                },
+                newNumArr:function(){
+                    return this.numArr.sort(function(a, b){
+                        return a-b>0?1:0;
+                    })
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
