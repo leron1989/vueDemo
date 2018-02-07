@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-component-child</title>
+    <script src="../../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>vue-component-child</h1>
+    <hr>
+    <p style="color:red">
+        1. 子组件需要定义在父组件中
+    </p>
+    <hr>
+    <div id="app">
+        <h3></h3>
+        <leron></leron>
+        <hr>
+    </div>
+
+    <script type="text/javascript">
+
+        var cityComp = {
+            template:`
+                <span style="color:blue">来自浙江的江山</span>
+            `
+        }
+
+        var leronComp = {
+            template:`
+                <div>
+                    <p style="color:red">Leron来自浙江</p>
+                    <city></city>
+                </div>
+            `,
+            components:{
+                "city":cityComp
+            }
+        }
+        
+        var app = new Vue({
+            el:"#app",
+            data:{
+            },
+            components:{
+                "leron":leronComp
+            }
+        });
+    </script>
+</body>
+</html>
