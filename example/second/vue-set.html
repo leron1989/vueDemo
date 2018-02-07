@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.set</title>
+    <script src="../../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>Vue.set 自定义指令</h1>
+    <hr>
+    <p style="color:red">
+        1. 用于在构造器外部操作构造器内部的数据、属性或者方法。<br>
+        2. 通常改变全局变量方法，当只改变数组时Vue无法监听到，只有使用Vue.set方法才能监听到。
+    </p>
+    <hr>
+    <div id="app">
+        <h3>Vue.set构造器外部操作构造器内部的数据、属性或者方法</h1>
+        <hr>
+        <h3>示例</h3>
+        {{count}}<br>
+        <button onclick="add1()">ADD1</button>
+        <button onclick="add2()">ADD2</button>
+        <button onclick="add3()">ADD3</button>
+        <hr>
+        <h3>改变数组</h3>
+        <ul>
+            <li v-for="item in arr">{{item}}</li>
+        </ul>
+        <button onclick="add4()">ADD4</button><span>当点击按钮时只改变数组，普通方法不生效</span><br>
+        <button onclick="add5()">ADD5</button><span>当点击按钮时改变其他dom元素时，普通方法可以生效</span><br>
+        <button onclick="add6()">ADD6</button><span>当点击按钮时只改变数组，Vue.set可以生效</span><br>
+    </div>
+
+    <script type="text/javascript">
+        function add1(){
+            // Vue.set(app, "count", 2);
+            Vue.set(outdata, "count", 2);
+        }
+        function add2(){
+            app.count++
+        }
+        function add3(){
+            outdata.count++
+        }
+        function add4(){
+            app.arr[2] = "sb"
+        }
+        function add5(){
+            app.count++,
+            app.arr[2] = "sb"
+        }
+        function add6(){
+            Vue.set(app.arr, 2, "diaoshi")
+        }
+        
+        var outdata = {
+            count: 1,
+            arr:["zhangsan","lisi","wangwu"]
+        }
+
+        var app = new Vue({
+            el:"#app",
+            data:outdata
+        });
+    </script>
+</body>
+</html>

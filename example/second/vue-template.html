@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Template 制作模版</title>
+    <script src="../../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>Template 制作模版</h1>
+    <hr>
+    <p style="color:red">
+        Vue一共有4种构建模板方法，此处只涉及三种，XXX.vue的方式在vue-cli中讲到<br>
+        1. 选项模板，直接在template选项里面写<br>
+        2. 自定义标签模板<br>
+        3. script标签模板，注意：type="x-template"，这种方式的好处是可以通过src引用外部模板<br>
+    </p>
+    <hr>
+    <div id="app">
+        <h3>选项模板（若无法查看，请修改注释）</h3>
+        
+        <hr>
+
+        <h3>自定义模板（若无法查看，请修改注释）</h3>
+        <mytemplate id="myTemp">
+            <h2 style="color:red">这是一个自定义标签模板<h2>
+        </mytemplate>
+        <hr>
+
+        <h3>script标签模板（若无法查看，请修改注释）</h3>
+        <script type="x-template" id="sTemp">
+            <h2 style="color:red">这是一个script标签模板<h2>
+        </script>
+    </div>
+
+    <script type="text/javascript">
+        
+        var app = new Vue({
+            el:"#app",
+            data:{
+
+            },
+            // template:
+            // `
+            //     <h2 style="color:red">这是一个选项模板<h2>
+            // `
+            // template:"#myTemp"
+            template:"#sTemp"
+        });
+    </script>
+</body>
+</html>

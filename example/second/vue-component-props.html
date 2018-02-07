@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-component-props</title>
+    <script src="../../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>vue-component-props 组件属性</h1>
+    <hr>
+    <p style="color:red">
+        1. 自定义附件属性，vue不支持“-”,因此属性名需要用小驼峰写法代替<br>
+        2. 可以通过v-bind给自定义属性绑定值
+    </p>
+    <hr>
+    <div id="app">
+        <h3>自定义组件属性</h3>
+        <jlr here="浙江"></jlr>
+        <hr>
+        <h3>自定义组件属性值绑定</h3>
+        <leron v-bind:from-here="addr"></leron>
+        <hr>
+    </div>
+
+    <script type="text/javascript">
+        
+        var app = new Vue({
+            el:"#app",
+            data:{
+                addr:"江山"
+            },
+            components:{
+                "jlr":{
+                    template:`<span style="color:blue">我来自哪里？我来自：{{here}}</span>`,
+                    props:["here"]
+                },
+                "leron":{
+                    template:`<span style="color:gray">我来自哪里？我来自：{{fromHere}}</span>`,
+                    props:["fromHere"]
+                }
+            }
+        });
+    </script>
+</body>
+</html>
