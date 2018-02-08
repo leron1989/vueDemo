@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-extend-option</title>
+    <script src="../../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>vue-extend-option扩展选项</h1>
+    <hr>
+    <p style="color:red">
+        1. 先执行扩展的方法，后执行原生的<br>
+        2. 扩展的methods选项中的方法不能覆盖原生methods选项的同名方法
+        3. 可以通过delimiters选项改变{{}}插值的形式
+    </p>
+    <hr>
+    <div id="app">
+        <h3>扩展选项</h3>
+        <p v-text="num"></p>
+        <p>${num}</p>
+        <button @click="add">ADD</button><br>
+        <button @click="add2(2)">ADD2</button>
+        <hr>
+    </div>
+
+    <script type="text/javascript">
+
+        var extendObj = {
+            updated:function(){
+                console.log("扩展的updated方法：" + this.num)
+            },
+            methods:{
+                add:function(){
+                    this.num++
+                    console.log("扩展的methods选项：" + this.num)
+                },
+                add2:function(n){
+                    this.num += n
+                    console.log("扩展的methods选项中的add2：" + this.num)
+                }
+            }
+        }
+
+        var app = new Vue({
+            el:"#app",
+            data:{
+                num:1
+            },
+            methods:{
+                add:function(){
+                    this.num++;
+                    console.log("原生methods选项：" + this.num);
+                }
+            },
+            updated:function(){
+                console.log("原生updated方法：" + this.num)
+            },
+            extends:extendObj,
+            delimiters:["${", "}"]
+        })
+
+    </script>
+</body>
+</html>

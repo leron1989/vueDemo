@@ -11,22 +11,45 @@
     <h1>vue-mixins混入选项</h1>
     <hr>
     <p style="color:red">
-        1. 构造器写好了，临时添加可用混入，如电商促销，满199-100这种活动，可以减少源代码的污染
-        2. 全局混入，可以用于对所有构造器混入公用方法
-        3. 执行顺序：全局混入 > 局部混入 > 原生
+        1. 构造器写好了，临时添加可用混入，如电商促销，满199-100这种活动，可以减少源代码的污染<br>
+        2. 全局混入，可以用于对所有构造器混入公用方法<br>
+        3. 执行顺序：全局混入 > 局部混入 > 原生<br>
     </p>
     <hr>
     <div id="app">
-        <h3></h3>
+        <h3>混入选项</h3>
+        <p v-text="num"></p>
+        <button @click="add">ADD</button>
         <hr>
     </div>
 
     <script type="text/javascript">
+        var innerMxin = {
+            updated:function(){
+                console.log("构造器内部混入：" + this.num)
+            }
+        }
+
+        Vue.mixin({
+            updated:function(){
+                console.log("全局混入：" + this.num)
+            }
+        })
+
         var app = new Vue({
             el:"#app",
             data:{
-                message:"hello world"
-            }
+                num:1
+            },
+            methods:{
+                add:function(){
+                    this.num++
+                }
+            },
+            updated:function(){
+                console.log("原生uptaded方法：" + this.num);
+            },
+            mixins:[innerMxin]
         })
 
     </script>
