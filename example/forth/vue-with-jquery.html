@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-with-jquery</title>
+    <script src="../../assets/js/vue.js"></script>
+    <script src="../../assets/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <h1>vue的实例和内部组件</h1>
+    <hr>
+    <p style="color:red">
+        1. 在vue内部使用外部js框架，需要在mounted或者updated之后，vue是虚拟的dom,因此需要在dom挂在之后才能获取到dom元素<br>
+        2. 可以通过VUE实例调用构造器内部方法，如：app.add();
+    </p>
+    <hr>
+    <div id="app">
+        <h3></h3>
+        <p id="mess" v-text="message"></p>
+        <hr>
+    </div>
+
+    <script type="text/javascript">
+        
+
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:"你好，我是VUE"
+            },
+            mounted:function(){
+                $("#mess").text("你好，我是Jquery")
+            }
+        })
+
+    </script>
+</body>
+</html>

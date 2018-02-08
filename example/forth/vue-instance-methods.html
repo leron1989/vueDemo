@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-instance-methods</title>
+    <script src="../../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>$mount,$destroy,$forceUpdate,$nextTick</h1>
+    <hr>
+    <!-- <p style="color:red">
+        1. 
+    </p> -->
+    <!-- <hr> -->
+    <div id="app">
+        <h3>$mount & $destroy & $forceUpdate & $nextTick()</h3>
+        <leron></leron>
+        <button onclick="destroy()">销毁</button>
+        <button onclick="reload()"> 刷新</button>
+        <button onclick="tick()">修改</button>
+        <hr>
+
+    </div>
+
+    <script type="text/javascript">
+        var leronExt = Vue.extend({
+            template:`
+                <div style="color:red">扩展 {{message}}</div>
+            `,
+            data:function(){
+                return {
+                    message:"leron标签"
+                }
+            },
+            mounted:function(){
+                console.log("挂载")
+            },
+            destroyed:function(){
+                console.log("卸载")
+            },
+            updated:function(){
+                console.log("更新")
+            }
+        })
+
+        var extLeron = new leronExt().$mount("leron");
+
+        function destroy(){
+            extLeron.$destroy();
+        }
+
+        function reload(){
+            extLeron.$forceUpdate();
+        }
+
+        function tick(){
+            extLeron.message = "LERON 标签";
+            extLeron.$nextTick(function(){
+                console.log("修改")
+            });
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-instance-event</title>
+    <script src="../../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>$on & $once & $off</h1>
+    <hr>
+    <p style="color:red">
+        1. $on 构造器外部添加事件，注意：需要通过$emit调用<br>
+        2. $once 只执行一次<br>
+        3. $off 关闭事件
+    </p>
+    <hr>
+    <div id="app">
+        <h3></h3>
+        <p>{{num}}</p>
+        <button @click="add">ADD</button>
+        <button onClick="reduce()">REDUCE</button>
+        <button onClick="reduceOnce()">REDUCE ONCE</button>
+        <button onClick="offVReduce()">OFF REDUCE</button>
+        <hr>
+    </div>
+
+    <script type="text/javascript">
+        
+
+        var app = new Vue({
+            el:"#app",
+            data:{
+                num:1
+            },
+            methods:{
+                add:function(){
+                    this.num++
+                }
+            }
+        });
+
+        app.$on("vReduce", function(){
+            this.num--;
+        })
+
+        function reduce(){
+            app.$emit("vReduce");
+        }
+
+        app.$once("vReduceOnce", function(){
+            console.log("只执行一次");
+            this.num --;
+        })
+
+        function reduceOnce(){
+            app.$emit("vReduceOnce");
+        }
+
+        function offVReduce(){
+            console.log("关闭vReduce事件")
+            app.$off("vReduce");
+        }
+
+    </script>
+</body>
+</html>

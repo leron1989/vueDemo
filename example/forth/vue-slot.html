@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-slot</title>
+    <script src="../../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>vue-slot 内置组件</h1>
+    <hr>
+    <p style="color:red">
+        1. 通过slot给组件传递值
+    </p>
+    <hr>
+    <div id="app">
+        <h3></h3>
+        <leron>
+            <span slot="leronName">{{leronData.name}}</span>
+            <span slot="leronAge">18</span>
+            <span slot="leronSex">{{leronData.sex}}</span>
+        </leron>
+
+        <leron>
+            <span slot="leronName">jlr</span>
+            <span slot="leronAge">{{leronData.age}}</span>
+            <span slot="leronSex">{{leronData.sex}}</span>
+        </leron>
+
+        <hr>
+    </div>
+    <template id="temp">
+        <div>
+            <p>姓名：<slot name="leronName"></slot></p>
+            <p>年龄：<slot name="leronAge"></slot></p>
+            <p>身高：<slot name="leronSex"></slot></p>
+        </div>
+    </template>
+
+    
+
+    <script type="text/javascript">
+        var leronComp = {
+            template:"#temp"
+        }
+
+        var app = new Vue({
+            el:"#app",
+            data:{
+                leronData:{
+                    name:"Leron",
+                    age:28,
+                    sex:"male"
+                }
+            },
+            components:{
+                "leron":leronComp
+            }
+        })
+
+    </script>
+</body>
+</html>
